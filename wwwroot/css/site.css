@@ -1,0 +1,33 @@
+html {
+  font-size: 14px;
+  background-color: #dbc7c6;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+a {
+  color: black;
+}
+
+a:hover
+{
+  background-color : black;
+  color : wheat;
+}
+
+
+
+

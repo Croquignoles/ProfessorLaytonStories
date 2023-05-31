@@ -1,0 +1,44 @@
+@model IEnumerable<ProfessorLayton.Models.Game>;
+@{
+    ViewData["Title"] = "Jeux";
+}
+<h1>@ViewData["Title"]</h1>
+<br>
+<h3>Professeur Layton on the road again pour de nouvelles aventures &#128506;</h3>
+<br>
+<p>On vous présente ici les trois premiers opus de la saga Professeur Layton 
+<br> 
+<em>((et les meilleurs selon nous mais bon passons))</em>
+<br>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Convert.ToDateTime(item.ReleaseDate).ToString("dd/MM/yyyy")
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark"> En savoir plus</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

@@ -1,0 +1,76 @@
+@model ProfessorLayton.Models.Character
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Ajouter un personnage</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label">Prénom</label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br>
+                <label asp-for="LastName" class="control-label">Nom de famille</label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+             <div class="form-check-inline">
+                <br>
+                <label asp-for="IsBadGuy" class="form-check-label">Méchant</label>
+                <input asp-for="IsBadGuy" type="radio" class="form-check-input" value="true"/>
+                <span asp-validation-for="IsBadGuy" class="text-danger"></span>
+            </div>
+            <div class="form-check-inline">
+                <br>
+                <label asp-for="IsBadGuy" class="form-check-label">Gentil</label>
+                <input asp-for="IsBadGuy" type="radio" class="form-check-input" value="false" />
+                <span asp-validation-for="IsBadGuy" class="text-danger"></span>
+            </div>
+             <div class="form-group">
+                <br>
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <br>
+             <div class="form-group">
+                Fichiers Acceptés : .jpg,.png. <br>
+                Veillez à correctement nommer votre fichier selon le personnage:"Prenom+Numero d'image"
+                <br>
+                Exemple : "Hershel1".jpg 
+                <p><br></p>
+
+                <input asp-for="ImageFile1" accept="image/jpg,image/png" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile1" class="custom-file"></span>
+            </div> 
+            <div class="form-group">
+                <br>
+                <input type="submit" value="Ajouter" class="btn btn-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <br>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">  
+        // filename appears in the input box
+        $(".custom-file-input").on("change", function () {  
+            var fileName = $(this).val().split("\\").pop();  
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);  
+        });  
+    </script>  
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

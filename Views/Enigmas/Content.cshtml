@@ -1,0 +1,118 @@
+@model ProfessorLayton.Models.Enigma;
+@{
+  ViewData["Title"] = @Html.DisplayFor(model => model.Name);
+}
+<h1>@ViewData["Title"]</h1>
+<br>
+<p>
+  <i>Voici l'énoncé de cette énigme :</i>
+  <br>
+  <br>
+  @Html.DisplayFor(model => model.Content)
+</p>
+@{
+    string rootpath = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "wwwroot");
+    string nom=@Model.Name;
+    string extensionJpg=".jpg";
+    string extensionPng=".png";
+    int fileCount = (from file in Directory.EnumerateFiles(rootpath+"/img/enigma",nom+"*")
+                        select file).Count();
+    int isJpg=(from file in Directory.EnumerateFiles(rootpath+"/img/enigma",nom+extensionJpg)
+                        select file).Count();
+    int isPng=(from file in Directory.EnumerateFiles(rootpath+"/img/enigma",nom+extensionPng)
+                        select file).Count();                    
+}
+
+<div class="row">
+    @{for(int i=1; i<=fileCount;i++){
+        <div class="col-sm-@(12/fileCount) " align="center">
+        @* <img  src= "~/img/character/@Url.Content(Model.getUrl(i))" alt="Photo de @Model.FirstName" width=auto height=250 /> *@
+        @if(isJpg>0)
+        {
+            <img  src= "~/img/enigma/@Url.Content(@nom+extensionJpg)" alt="Photo de @Model.Name" width=auto height=250 />
+        }
+        else if(isPng>0)
+        {
+            <img  src= "~/img/enigma/@Url.Content(@nom+extensionPng)" alt="Photo de @Model.Name" width=auto height=250 />
+        }
+        <br><br><br><br>
+  </div>
+    }} 
+@if (Model.Hints != null)
+{
+  <h6>&#127384; <i> Besoin d'aide ? </i>&#127384; <i>Vous disposez de @Model.Hints.Count() indices </i></h6>
+  for (int i = 0; i < Model.Hints.Count(); i++)
+  {
+    if (Model.Hints[i].HintRange == HintRange.firstStep)
+    {
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header bg-dark" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-light" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+          aria-expanded="false" aria-controls="collapseOne">
+                Petit indice
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+            <div class="card-body">
+
+              @Html.DisplayFor(model => model.Hints[i].Content)
+
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    else if (Model.Hints[i].HintRange == HintRange.advancedHint)
+    {
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header bg-dark" id="headingTwo">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-light" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
+          aria-expanded="false" aria-controls="collapseTwo">
+                Sacré coup de pouce
+              </button>
+            </h5>
+          </div>
+
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+            <div class="card-body">
+
+              @Html.DisplayFor(model => model.Hints[i].Content)
+
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    else
+    {
+      <div id="accordion">
+        <div class="card">
+          <div class="card-header bg-dark" id="headingThree">
+            <h5 class="mb-0">
+              <button class="btn btn-link text-light" data-bs-toggle="collapse" data-bs-target="#collapseThree"
+          aria-expanded="false" aria-controls="collapseThree">
+                Autant vous donner la solution </button>
+            </h5>
+          </div>
+
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-bs-parent="#accordion">
+            <div class="card-body">
+
+              @Html.DisplayFor(model => model.Hints[i].Content)
+
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  }
+  <br>
+  <a asp-action="Index">Retour</a>
+
+}

@@ -1,0 +1,14 @@
+ @model ProfessorLayton.Models.Solution;
+@{
+    ViewData["Title"] = "Solution";
+}
+<h1>@ViewData["Title"]</h1>
+<br>
+<p>C'est l'heure de voir si vous êtes un pro des énigmes 	&#128373;</p>
+<hr> 
+<center>
+<p>@Html.DisplayFor(model => model.Content) </p>
+  <img src= "~/img/solution/@Url.Content(Model.urlImg)" alt="Une superbe image de merde à chier qui s'affiche une fois sur 12000000000000000000000000000000000000002 " />
+</center>
+<br>
+<a asp-action="Index">Retour</a>

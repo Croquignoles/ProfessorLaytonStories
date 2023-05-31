@@ -1,0 +1,71 @@
+@model IEnumerable<ProfessorLayton.Models.Music>;
+@{
+    ViewData["Title"] = "Musiques";
+}
+<h1>@ViewData["Title"]</h1>
+<br>
+<h3>Qu'entends-je ? Le doux son de la matière grise en ébulition ? &#127926;</h3>
+<br>
+<p>Sont répertoriées ici certaines musiques emblématiques des jeux Professeur Layton, connu notamment pour la qualité de ses OST.
+<br>
+Vous pouvez en <a asp-action="Create">ajouter</a> une si vous le souhaitez. 
+<br>   
+<em>(vous savez il y a vraiment beaucoup, BEAUCOUP de musiques , et dans cette équipe nous croyons au travail collaboratif)</em>
+<br>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                Vidéo
+            </th>
+            <th>
+                Actions possibles
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href=@item.URL>@Html.DisplayFor(modelItem => item.Name)</a>
+                </td>
+                <td>
+                    @{
+                        var videoId = item.getVideoId();
+                    }
+                    <audio src="https://www.youtube.com/embed/@videoId" autoplay="autoplay" loop="loop"></audio>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/@videoId"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                    <br>
+                    <br>
+                    <p>Vous pouvez entendre cette musique dans le ou les jeu(x) suivant(s) :</p>
+                    @foreach (var game in item.Games)
+                    {
+                        @:&#65039;
+                        <a asp-area="" asp-controller="Games" asp-action="Details" asp-route-id=@game.Id >@Html.DisplayFor(item => game.Title) </a>
+                        <br>
+                    }
+                    <br>
+
+                    <br>
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-dark">Modifier</a>
+                    &emsp;
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Supprimer</a>
+                </td>
+                <td>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

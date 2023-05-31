@@ -1,0 +1,39 @@
+@model ProfessorLayton.Models.Game
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>@Html.DisplayFor(model => model.Title)</h2>
+<br>
+<p>
+    @Html.DisplayFor(model => model.Description)
+</p>
+</br>
+
+</br>
+
+
+@{
+    var nbimg = 0;
+    if(Model.UrlImage1 is not null && Model.UrlImage2 is not null && Model.UrlImage3 is not null)
+        nbimg = 3;
+    else if(Model.UrlImage1 is not null && Model.UrlImage2 is null && Model.UrlImage3 is null) 
+        nbimg = 1;
+    else if(Model.UrlImage1 is not null && Model.UrlImage2 is not null && Model.UrlImage3 is null) 
+        nbimg = 2;    
+}
+
+
+<div class="row">
+    @{for(int i=1; i<=nbimg;i++){
+        <div class="col-sm-@(12/nbimg) " align="center">
+        <img  src= "~/img/game/@Url.Content(Model.getUrl(i))" alt="Une superbe image " width=auto height=250 />
+</div>
+    }} 
+<div>
+    <br>
+    <a asp-action="Index">Retour</a>
+</div>
+    <p><br></p>
+

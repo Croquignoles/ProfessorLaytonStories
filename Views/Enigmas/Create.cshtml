@@ -1,0 +1,56 @@
+@model ProfessorLayton.Models.Enigma
+
+@{
+    ViewData["Title"] = "Add";
+    Game game = (Game)ViewData["Game"]!;
+    
+}
+
+<h2>Ajouter une énigme à la liste</h2>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nom de l'énigme</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br>
+                <label asp-for="Content" class="control-label">Contenu de l'énigme</label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <br>
+            À quel jeu cette énigme appartient-elle ?
+            <div class="form-group">
+                <select asp-for="GameId" class="form-control" asp-items="ViewBag.GameId"></select>
+                <span asp-validation-for="GameId" class="text-danger"></span>
+            </div>
+            <br>           
+            Si vous le souhaitez, vous pouvez ajouter une image du nom de votre énigme directement dans le dossier /img/enigma 
+            <br>
+@* <div class="form-group">
+                Fichiers Acceptés : .jpg,.png. Veillez à correctement nommer votre fichier selon l'énigme:"Nom de l'énigme"
+                Exemple : "Combien de bonbons".jpg 
+                <input asp-for="ImageFile" accept="image/jpg,image/png" class="form-control" type="file" />
+                <span asp-validation-for="ImageFile" class="custom-file"></span>
+            </div>  *@
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Ajouter la solution associée" class="btn btn-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <br>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,36 @@
+
+@model ProfessorLayton.Models.Hint
+
+@{
+    ViewData["Title"] = "Create";
+    Enigma enigma = (Enigma)ViewData["Enigma"]!;
+}
+
+<h3>Aidez ceux qui tenterons de résoudre votre énigme avec 3 indices...</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <select asp-for="HintRange" asp-items="Html.GetEnumSelectList<HintRange>()"></select>
+            <span asp-validation-for="HintRange" class="text-danger"></span>
+            <div class="form-group">
+                <input type="submit" value="Ajouter l'énigme" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a href="~/Enigmas/Index">Back to List</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

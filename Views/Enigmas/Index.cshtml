@@ -1,0 +1,118 @@
+ @model IEnumerable<ProfessorLayton.Models.Enigma>;
+@{
+    ViewData["Title"] = "Énigmes";
+}
+<h1>@ViewData["Title"]</h1>
+<br>
+<h3>Vous retrouverez ici les énigmes des trois premiers jeux Professeur Layton &#129513;</h3>
+<br>
+<p>
+    Vous pouvez les modifier, les supprimer (mais c'est triste) et bien sûr les consulter pour les résoudre et faire chauffer vos méninges !
+    <br>
+    Il est également possible d'<a asp-action="Create">ajouter une énigme</a>, ainsi que la solution et les indices qui lui sont associés 
+    <br>
+    <em>(vous savez il y a vraiment beaucoup, BEAUCOUP d'énigmes, et dans cette équipe nous croyons au travail collaboratif)</em>
+
+</p>
+
+
+<div id="accordion" style="background-color: #a06967;">
+  <div class="card ">
+    <div class="card-header bg-dark" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link text-light" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        	&#127962; Professeur Layton et l'étrange village 	&#127962;
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion">
+      <div class="card-body">
+            @{foreach (var item in Model)
+                if(item.GameId == 1){
+                    
+                    <div class=row>
+                        <div class="col md-auto">
+                    @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                    <div class="col col-lg-4">
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Content" asp-route-id=@item.Id class="btn btn-outline-dark">Énoncé</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Solution" asp-route-id=@item.Id class="btn btn-outline-dark">Solution</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Delete" asp-route-id=@item.Id class="btn btn-outline-dark">Delete</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Edit" asp-route-id=@item.Id class="btn btn-outline-dark">Edit</a>
+                        <br><br>
+                        </div>
+                    </div>
+                    }
+                    }      
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header text-white bg-dark" id="headingTwo">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed text-light" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        &#128642; Professeur Layton et la boite de Pandore &#128642;
+        </button> 
+      </h5>
+    </div>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-bs-parent="#accordion">
+      <div class="card-body">
+                @{foreach (var item in Model)
+                if(item.GameId == 2){
+                    <div class=row>
+                        <div class="col md-auto">
+                    @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                    <div class="col col-lg-4">
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Content" asp-route-id=@item.Id class="btn btn-outline-dark"><span class="glyphicon glyphicon-trash"></span>Énoncé</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Solution" asp-route-id=@item.Id class="btn btn-outline-dark">Solution</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Delete" asp-route-id=@item.Id class="btn btn-outline-dark">Effacer</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Edit" asp-route-id=@item.Id class="btn btn-outline-dark">Modifier</a>
+                        <br><br>
+                        </div>
+                    </div>
+                    }
+                    }      
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header bg-dark" id="headingThree">
+      <h5 class="mb-0">
+        <button class="btn btn-link collapsed text-light" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+    	&#128368; Professeur Layton et le destin perdu 	&#128368;
+        </button>
+      </h5>
+    </div>
+    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+      <div class="card-body">
+            @{foreach (var item in Model)
+                if(item.GameId == 3){
+                    <div class=row>
+                        <div class="col md-auto">
+                    @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                    <div class="col col-lg-4">
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Content" asp-route-id=@item.Id class="btn btn-outline-dark">Énoncé</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Solution" asp-route-id=@item.Id class="btn btn-outline-dark">Solution</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Delete" asp-route-id=@item.Id class="btn btn-outline-dark">Delete</a>
+                        &emsp;
+                        <a asp-area="" asp-controller="Enigmas" asp-action="Edit" asp-route-id=@item.Id class="btn btn-outline-dark">Edit</a>
+                        <br><br>
+                        </div>
+                    </div>
+                    }
+                    }      
+      </div>
+    </div>
+  </div>
+</div>

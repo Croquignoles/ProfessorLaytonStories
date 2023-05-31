@@ -1,0 +1,42 @@
+@model ProfessorLayton.Models.Solution
+
+@{
+    ViewData["Title"] = "Create";
+    Enigma enigma = (Enigma)ViewData["Enigma"]!;
+}
+
+<h2>Ajoutez une solution à votre énigme</h2>
+<h3>(c'est mieux)</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div> 
+            <div class="form-group">
+                <label asp-for="Content" class="control-label"></label>
+                <input asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br>
+                <label asp-for="urlImg" class="control-label" hidden></label>
+                <input asp-for="urlImg" class="form-control" value="0112" hidden/>
+                <span asp-validation-for="urlImg" class="text-danger"></span> 
+            </div>
+            <div class="form-group">
+                <br>
+                <input type="submit" value="Ajouter l'énigme" class="btn btn-dark">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <br>
+     <a href="~/Enigmas/Index">Retour</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

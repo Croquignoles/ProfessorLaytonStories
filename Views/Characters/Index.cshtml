@@ -1,0 +1,60 @@
+@model IEnumerable<ProfessorLayton.Models.Character>;
+@{
+    ViewData["Title"] = "Personnages";
+}
+<h1>@ViewData["Title"]</h1>
+<br>
+<h3>Hé là, qui va là? Inspecteur <strike>Gadget</strike> Layton &#127913;</h3>
+<br>
+<p>Voici quelques personnages emblématiques des jeux Professeur Layton.
+    <br>
+    Il est possible d'ajouter un personnage en cliquant <a asp-action="Create">ici</a>
+    <br>
+    <i>(vous savez il y a vraiment beaucoup, BEAUCOUP de personnages, et dans cette équipe nous croyons au travail
+    collaboratif)</i>
+    <br>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @{
+                        if (item.LastName is null)
+                        {
+                            <text> --- </text>
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.LastName)
+                        }
+                    }
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-dark">En savoir plus</a>
+                </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-dark">Supprimer</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

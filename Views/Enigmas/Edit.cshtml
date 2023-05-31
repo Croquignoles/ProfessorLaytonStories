@@ -1,0 +1,45 @@
+@model ProfessorLayton.Models.Enigma
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Modifier cette énigme</h2>
+<hr />
+<div class="row"> 
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label">Nom de l'énigme</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <br>
+                <label asp-for="Content" class="control-label">Contenu de l'énigme</label>
+                @*<textarea id="Content" name="Content" rows="5" cols="42"></textarea>*@
+                <input textarea asp-for="Content" class="form-control" />
+                <span asp-validation-for="Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="GameId" class="form-control" hidden/>
+            </div>
+           
+            <div class="form-group">
+                <br>
+                <input type="submit" value="Appliquer les changements" class="btn btn-dark" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <br>
+    <a asp-action="Index">Retour</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
